@@ -1,0 +1,42 @@
+# irob_assignment_1/config/slam_params.yaml
+
+slam_toolbox:
+  ros__parameters:
+    # Plugin params
+    solver_plugin: "solver_plugins::CeresSolver"
+    ceres_linear_solver: "SPARSE_NORMAL_CHOLESKY"
+    ceres_preconditioner: "SCHUR_JACOBI"
+    ceres_trust_strategy: "LEVENBERG_MARQUARDT"
+    ceres_dogleg_type: "TRADITIONAL_DOGLEG"
+    ceres_loss_function: "None"
+
+    # ROS Frame Names
+    odom_frame: "odom"
+    map_frame: "map"
+    base_frame: "base_footprint"
+
+    # TF use
+    use_scan_matching: true
+    use_map_saving: true
+    use_sim_time: true # IMPORTANT: Set to true for simulations
+
+    # Map size / start point
+    map_resolution: 0.05 # Hector was 0.20, 0.05 is more standard
+    map_size: 2048 # Hector was 256, this is a more reasonable default
+    map_start_x: 0.0
+    map_start_y: 0.0
+    map_multi_res_levels: 2 # Hector was 4
+
+    # Map update parameters
+    minimum_travel_distance: 0.2 # Corresponds to map_update_distance_thresh
+    minimum_travel_heading: 0.1 # Corresponds to map_update_angle_thresh
+    map_update_interval: 2.0 # Corresponds to map_pub_period
+    
+    # Thresholds
+    occupied_thresh: 0.65 # Corresponds to update_factor_occupied (0.9)
+    free_thresh: 0.25 # Corresponds to update_factor_free (0.4)
+
+    # Laser scan parameters
+    scan_topic: "/scan"
+    laser_min_dist: 0.12
+    laser_max_dist: 10.0

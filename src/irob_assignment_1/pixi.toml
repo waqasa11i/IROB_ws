@@ -1,0 +1,23 @@
+[package.build.backend]
+channels = ["https://prefix.dev/conda-forge"]
+name = "pixi-build-ros"
+version = "*"
+
+[package.build.config]
+extra-input-globs = [
+  "completion/*",
+  "launch/**/*.yaml",
+  "launch/**/*.xml",
+  "launch/**/*.py",
+  "config/**/*.yaml",
+  "irob_assignment_1/**/*.py",
+]
+
+[package.host-dependencies]
+ros2-distro-mutex = ">=0.13,<0.14"
+
+[package.build-dependencies]
+ros2-distro-mutex = ">=0.13,<0.14"
+
+[package.run-dependencies]
+ros2-distro-mutex = ">=0.13,<0.14"
