@@ -40,7 +40,7 @@ ros-jazzy-controller-manager = ">=4.42.1,<5"
 ros-jazzy-irob-assignment-1 = { path = "src/irob_assignment_1" }
 ros-jazzy-controller-manager-msgs = ">=4.42.1,<5"
 ros-jazzy-nav2-bringup = ">=1.3.10,<2"
-
+colcon-common-extensions = ">=0.3.0,<0.4"
 
 [tasks]
 simulator = { cmd = "ros2 launch irob_assignment_1 simulator.launch.py" }
