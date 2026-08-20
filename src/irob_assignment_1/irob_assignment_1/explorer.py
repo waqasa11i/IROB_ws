@@ -2,10 +2,12 @@
 
 import rclpy
 from rclpy.node import Node
+from rclpy.time import Duration, Time
 from nav_msgs.msg import OccupancyGrid
 from geometry_msgs.msg import PoseStamped
 from nav2_msgs.action import NavigateToPose
 from rclpy.action import ActionClient
+from tf2_ros import Buffer, TransformListener
 import numpy as np
 
 
@@ -17,8 +19,10 @@ class ExplorerNode(Node):
         # TODO: Create an ActionClient for Nav2's NavigateToPose on 'navigate_to_pose'.
         # TODO: Create a set to store visited frontier cells (row, col).
         # TODO: Initialize storage for the latest map (self.map_data = None).
+        # TODO: Create a TF2 Buffer and TransformListener (self.tf_buffer, self.tf_listener).
         # TODO: Initialize the robot's grid position (self.robot_position), to be
         #       updated by localization (placeholder values are fine for now).
+        # TODO: Initialize a state flag (self.navigating)
         # TODO: Create a periodic timer (e.g., every 5.0 seconds) that calls self.explore().
         pass
 
@@ -45,6 +49,7 @@ class ExplorerNode(Node):
         TODO: Check whether the goal was accepted or rejected.
         TODO: If accepted, request the result and attach self.navigation_complete_callback
               to the result future (goal_handle.get_result_async()).
+        TODO: Update self.navigating accordingly.
         """
         pass
 
@@ -53,6 +58,7 @@ class ExplorerNode(Node):
         TODO: Handle completion of the navigation action.
               - If successful, log/record the result.
               - On failure, log the exception or error.
+        TODO: Update self.navigating
         """
         pass
 
@@ -81,14 +87,27 @@ class ExplorerNode(Node):
         """
         pass
 
+    def get_robot_position(self):
+        """
+        TODO: Find the robots current position using TF2.
+              - Look up the transform from 'map' to 'base_link'.
+              - Convert the resulting world (x, y) into grid (row, col) using the
+                map's resolution and origin (the inverse of the formula used in
+                explore() to go from grid to world).
+              - Update self.robot_position.
+        """
+        pass
+
     def explore(self):
         """
         TODO: Main exploration routine:
               - If no map yet, return early.
+              - If self.navigating indicates ongoing navigation, return early.
               - Convert the flat map data to a 2D numpy array with shape
                 (height, width).
               - Call find_frontiers(map_array) to get candidates.
               - If none, optionally log "exploration complete" and return.
+              - Call get_robot_position().
               - Call choose_frontier(frontiers); if None, return.
               - Convert the chosen (row, col) to world (x, y) using:
                     x = col * resolution + origin.position.x
